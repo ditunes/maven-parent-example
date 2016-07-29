@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+		 					 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>me.youline</groupId>
+	<artifactId>youline-builder</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>youline's Project</name>
+	<url>http://youline.me</url>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+	<developers>
+		<developer>
+			<id>linhan</id>
+			<email>oldhomelh@qq.com</email>
+			<url>http://www.youline.me</url>
+			<organization>youline</organization>
+		</developer>
+	</developers>
+
+	<mailingLists>
+		<mailingList>
+			<name>linhan</name>
+			<post>18106981399@189.cn</post>
+		</mailingList>
+	</mailingLists>
+	
+	<repositories>
+		<repository>
+			<id>youline-nexus</id>
+			<name>Youline Nexus</name>
+			<url>http://192.168.1.115:8081/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+ 
+	<pluginRepositories>
+			<pluginRepository>
+            			<id>youline-nexus</id>
+            			<name>Youline Nexus</name>
+            			<url>http://192.168.1.115:8081/nexus/content/groups/public/</url>
+            			<releases>
+            				<enabled>true</enabled>
+            			</releases>
+            			<snapshots>
+            				<enabled>false</enabled>
+            			</snapshots>
+            </pluginRepository>
+	</pluginRepositories>
+	
+    <!-- 设定使用Release插件发布的仓库服务器 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+     <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Team Nexus Release Repository</name>
+            <url>http://192.168.1.115:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Team Nexus Snapshot Repository</name>
+            <url>http://192.168.1.115:8081/nexus/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+	
+	<!-- 将mini－project、web-porject、 parent-pom三个项目聚合安装  -->
+	<profiles>
+		<profile>
+			<id>modules</id>
+				<modules>
+					<module>modules/parent</module>
+					<module>tools/maven/mini-project/archetype</module>
+					<module>tools/maven/mini-web-project/archetype</module>
+				</modules>
+		  </profile>
+	</profiles>
+</project>

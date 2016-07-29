@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="youline-mini-web-project"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <fileSets>
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/webapp</directory>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/test/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+	<fileSet filtered="true" encoding="UTF-8">
+      <directory>src/test/resources</directory>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>server/conf</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+	<fileSet encoding="UTF-8" filtered="true">
+      <directory>doc</directory>
+      <includes>
+        <include>**/*.*</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>bin</directory>
+      <includes>
+        <include>**/*.bat</include>
+      </includes>
+    </fileSet>
+	<fileSet encoding="UTF-8">
+      <directory>server/webapps</directory>
+      <includes>
+        <include>**/*.**</include>
+      </includes>
+    </fileSet>
+	<fileSet encoding="UTF-8">
+      <directory>src/main/webapp/css</directory>
+      <includes>
+        <include>**/*.**</include>
+      </includes>
+    </fileSet>
+	<fileSet encoding="UTF-8">
+      <directory>src/main/webapp/js</directory>
+      <includes>
+        <include>**/*.**</include>
+      </includes>
+    </fileSet>
+	<fileSet encoding="UTF-8">
+      <directory>src/main/webapp/images</directory>
+      <includes>
+        <include>**/*.**</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>checkstyle.xml</include>
+        <include>findbugs-exclude.xml</include>
+        <include>LICENSE.txt</include>
+      </includes>
+    </fileSet>
+	 <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.springBeans</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>{artifactId} Web Application</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/applicationContext.xml,
+			classpath*:/applicationContext-validator.xml
+		</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>local</param-value>
+	</context-param>
+	<!-- root -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>{artifactId}.webapp.root</param-value>
+	</context-param>
+
+	<!--Spring ApplicationContext 载入 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<!-- Filter 定义 -->
+	<!-- Character Encoding filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- Filter 映射 -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+
+	<!-- Spring MVC Servlet -->
+	<servlet>
+		<servlet-name>springServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+		<multipart-config>
+			<!-- 传递文件大小 209MB-->
+    		<max-file-size>209700000</max-file-size>
+    		<!-- multipart/form-data传递文件数据大小 418MB-->
+    		<max-request-size>418018841</max-request-size>
+    		<!-- 文件临时存放于硬盘的阀值，必须存在，否则max-file-size等将没有效果 1M -->
+    		<file-size-threshold>1048576</file-size-threshold>
+		</multipart-config>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>springServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 浏览器不支持put,delete等method,由该filter将_method=delete转换为标准的http delete方法 -->
+	<filter>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+		<async-supported>true</async-supported>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<servlet-name>springServlet</servlet-name>
+	</filter-mapping>
+
+
+	<!-- session超时定义,单位为分钟 -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+
+	<!-- 出错页面定义 -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/pages/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/pages/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/pages/error/404.jsp</location>
+	</error-page>
+</web-app>

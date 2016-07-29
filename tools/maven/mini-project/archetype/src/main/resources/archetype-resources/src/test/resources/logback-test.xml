@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For more help please see  										-->
+<!-- 	http://logback.qos.ch/manual/ 								-->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+
+
+<!-- 控制台输出配置      -->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+  <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d [%thread] %-5level %logger{0} - %msg%n</pattern>
+    </encoder>
+    
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+  </appender>
+  
+   <!-- 滚动式文件日志配置     -->
+  <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File.DatePattern>.yyyy-MM-dd-HH</File.DatePattern>
+    <File>logs/${artifactId}.log</File>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    	<fileNamePattern>logs/archive/${artifactId}.%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+    	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        	<maxFileSize>1GB</maxFileSize>
+      	</timeBasedFileNamingAndTriggeringPolicy>  
+      	<maxHistory>30</maxHistory>   
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d [%thread] %-5level %logger{0} - %msg%n%ex</pattern>
+    </encoder>
+  </appender> 
+  
+  <root level="INFO">
+    <appender-ref ref="Console"/>
+    <appender-ref ref="RollingFile"/>
+  </root>
+</configuration>
